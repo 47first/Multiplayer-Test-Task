@@ -3,11 +3,18 @@ using UnityEngine;
 
 namespace Runtime
 {
-    public sealed class InputWrapper: MonoBehaviour
+    public sealed class InputWrapper: MonoBehaviour, IInputWrapper
     {
+        public static IInputWrapper Singleton { get; private set; }
+
         public event Action OnMoveLeft;
         public event Action OnMoveRight;
         public event Action OnJump;
+
+        private void Awake()
+        {
+            Singleton = this;
+        }
 
         private void Update()
         {

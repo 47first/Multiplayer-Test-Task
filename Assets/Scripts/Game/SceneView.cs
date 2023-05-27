@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using TMPro;
+using Unity.Netcode;
 using Unity.Services.Authentication;
 using Unity.Services.Core;
 using Unity.Services.Relay.Models;
@@ -14,16 +15,25 @@ namespace Runtime
 
         private void Start()
         {
-            SetJoinCode();
+            //SetJoinCode();
+        }
+
+        private void Update()
+        {
+            if(Input.GetKeyDown(KeyCode.H))
+                NetworkManager.Singleton.StartHost();
+
+            if(Input.GetKeyDown(KeyCode.C))
+                NetworkManager.Singleton.StartClient();
         }
 
         private async void SetJoinCode()
         {
-            codeTmp.text = "??????";
+            //codeTmp.text = "??????";
 
             string joinCode = await GetJoinCode(MaxConnections);
 
-            codeTmp.text = joinCode;
+            //codeTmp.text = joinCode;
         }
 
         public static async Task<string> GetJoinCode(int maxConn)

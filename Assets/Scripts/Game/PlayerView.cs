@@ -1,23 +1,38 @@
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Runtime
 {
-    public sealed class PlayerView : MonoBehaviour
+    public sealed class PlayerView : NetworkBehaviour
     {
+        // Network
+        internal NetworkVariable<Vector3> TargetScale { get; set; }
+
+        //Local
         [field: SerializeField] internal PlayerConfiguration Configuration { get; set; } = new();
         [field: SerializeField] internal Transform ModelTransform { get; set; }
         [field: SerializeField] internal Rigidbody2D Rigidbody { get; set; }
         [field: SerializeField] internal Collider2D Collider { get; set; }
-        [field: SerializeField] internal Vector3 MoveDir { get; set; }
         internal Vector3 InitialScale { get; private set; }
-        internal Vector3 TargetScale { get; set; }
-        [field: SerializeField] private InputWrapper InputWrapper { get; set; }
+        internal Vector3 MoveDir { get; set; }
+
         private PlayerPresenter _presenter;
 
-        private void Start()
+        private void Awake()
         {
-            InitialScale = TargetScale = ModelTransform.localScale;
-            _presenter = new(this, InputWrapper);
+            TargetScale = new(readPerm: NetworkVariableReadPermission.Everyone,
+                writePerm: NetworkVariableWritePermission.Owner);
+        }
+
+        public override void OnNetworkSpawn()
+        {
+            base.OnNetworkSpawn();
+
+            if (IsOwner == false)
+                return;
+
+            InitialScale = TargetScale.Value = ModelTransform.localScale;
+            _presenter = new(this);
         }
 
         private void Update()
@@ -25,11 +40,17 @@ namespace Runtime
             transform.position += MoveDir;
 
             ModelTransform.localScale = Vector3.LerpUnclamped(ModelTransform.localScale,
-                TargetScale,
+                TargetScale.Value,
                 Configuration.RotationSpeed);
         }
 
-        private void LateUpdate() => ResetValues();
+        private void LateUpdate()
+        {
+            if (IsOwner == false)
+                return;
+
+            ResetValues();
+        }
 
         private void ResetValues()
         {
