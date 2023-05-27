@@ -19,7 +19,7 @@ namespace Runtime
 
         private async void SetJoinCode()
         {
-            codeTmp.text = "Hello world";
+            codeTmp.text = "??????";
 
             string joinCode = await GetJoinCode(MaxConnections);
 
