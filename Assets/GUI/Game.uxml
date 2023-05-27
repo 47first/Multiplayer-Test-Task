@@ -1,5 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement>
-        <ui:Label text="JSD433" display-tooltip-when-elided="true" name="ServerKeyLabel" style="-unity-text-align: upper-center; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; -unity-font-style: bold; font-size: 39px; color: rgba(210, 210, 210, 0.59);" />
+    <ui:VisualElement style="width: 100%;">
+        <ui:Label text="JSD433" display-tooltip-when-elided="true" name="ServerKeyLabel" style="-unity-text-align: upper-center; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; -unity-font-style: bold; font-size: 32%; color: rgba(210, 210, 210, 0.59); text-shadow: 0 0 4px rgba(0, 0, 0, 0.31);" />
     </ui:VisualElement>
 </ui:UXML>
