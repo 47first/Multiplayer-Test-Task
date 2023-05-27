@@ -4,6 +4,7 @@ namespace Runtime
 {
     public class PlayerView : MonoBehaviour
     {
+        [field: SerializeField] internal Rigidbody2D Rigidbody { get; set; }
         [field: SerializeField] internal Vector3 MoveDir { get; set; }
         [field: SerializeField] private InputWrapper InputWrapper { get; set; }
         private PlayerPresenter _presenter;
@@ -15,6 +16,8 @@ namespace Runtime
 
         private void Update()
         {
+            _presenter.Update();
+
             transform.position += MoveDir;
         }
 

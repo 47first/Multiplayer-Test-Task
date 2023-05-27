@@ -19,6 +19,9 @@ namespace Runtime
 
             if (Input.GetKey(KeyCode.A))
                 OnMoveLeft?.Invoke();
+
+            if (Input.GetKeyDown(KeyCode.Space))
+                OnJump?.Invoke();
         }
     }
 }

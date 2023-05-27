@@ -14,8 +14,14 @@ namespace Runtime
             ConfigureInput(inputWrapper);
         }
 
+        public void Update()
+        {
+
+        }
+
         public void MoveLeft() => Move(Vector3.left);
         public void MoveRight() => Move(Vector3.right);
+        public void Jump() => _view.Rigidbody.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
 
         private void Move(Vector3 dir) => _view.MoveDir += dir * Time.deltaTime;
 
@@ -23,6 +29,7 @@ namespace Runtime
         {
             inputWrapper.OnMoveRight += MoveRight;
             inputWrapper.OnMoveLeft += MoveLeft;
+            inputWrapper.OnJump += Jump;
         }
     }
 }
