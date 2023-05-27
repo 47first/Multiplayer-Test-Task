@@ -19,9 +19,9 @@ namespace Runtime
 
         }
 
-        public void MoveLeft() => Move(Vector3.left);
-        public void MoveRight() => Move(Vector3.right);
-        public void Jump() => _view.Rigidbody.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
+        public void MoveLeft() => Move(Vector3.left * _view.Configuration.MoveSpeed);
+        public void MoveRight() => Move(Vector3.right * _view.Configuration.MoveSpeed);
+        public void Jump() => _view.Rigidbody.velocity = Vector2.up * _view.Configuration.JumpForce;
 
         private void Move(Vector3 dir) => _view.MoveDir += dir * Time.deltaTime;
 

@@ -2,8 +2,9 @@ using UnityEngine;
 
 namespace Runtime
 {
-    public class PlayerView : MonoBehaviour
+    public sealed class PlayerView : MonoBehaviour
     {
+        [field: SerializeField] internal PlayerConfiguration Configuration { get; set; } = new();
         [field: SerializeField] internal Rigidbody2D Rigidbody { get; set; }
         [field: SerializeField] internal Vector3 MoveDir { get; set; }
         [field: SerializeField] private InputWrapper InputWrapper { get; set; }
