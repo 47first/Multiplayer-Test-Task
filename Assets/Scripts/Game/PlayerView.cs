@@ -16,6 +16,7 @@ namespace Runtime
         [field: SerializeField] internal ProjectileShooter Shooter { get; set; }
         internal Vector3 InitialRotation { get; private set; }
         internal Vector3 MoveDir { get; set; }
+        internal float Health { get; set; }
 
         private PlayerPresenter _presenter;
 
@@ -59,6 +60,11 @@ namespace Runtime
         private void ResetValues()
         {
             MoveDir = Vector3.zero;
+        }
+
+        private void OnTriggerEnter2D(Collider2D collider)
+        {
+            InteractionHost.Singleton.SendInteraction(this, collider.gameObject);
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Runtime
         private const float bulletLifeTime = 1;
         [field: SerializeField] internal float Delay { get; set; }
         [field: SerializeField] internal float BulletSpeed { get; set; }
+        [field: SerializeField] internal float BulletDamage { get; set; }
 
         [SerializeField] private Projectile _projectilePrefab;
         [SerializeField] private Transform _shootDirection;
@@ -33,7 +34,7 @@ namespace Runtime
 
             projectile.transform.position = _shootDirection.position;
             projectile.transform.rotation = _shootDirection.rotation;
-            projectile.Configure(BulletSpeed, bulletLifeTime);
+            projectile.Configure(BulletSpeed, BulletDamage, bulletLifeTime);
 
             projectile.NetworkObject.SpawnWithOwnership(OwnerClientId);
         }
