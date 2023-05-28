@@ -17,7 +17,11 @@ namespace Runtime
         public void TryShoot()
         {
             if (IsOwner && CanShoot())
+            {
+                _lastTimeShoot = Time.realtimeSinceStartup;
+
                 ShootServerRpc();
+            }
         }
 
         public bool CanShoot() => Time.realtimeSinceStartup > _lastTimeShoot + Delay;
@@ -25,11 +29,6 @@ namespace Runtime
         [ServerRpc]
         private void ShootServerRpc()
         {
-            if (IsServer == false)
-                return;
-
-            _lastTimeShoot = Time.realtimeSinceStartup;
-
             var projectile = GameObject.Instantiate(_projectilePrefab);
 
             projectile.transform.position = _shootDirection.position;

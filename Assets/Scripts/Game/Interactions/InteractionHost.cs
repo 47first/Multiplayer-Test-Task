@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace Runtime
 {
@@ -8,13 +7,13 @@ namespace Runtime
     {
         public static IInteractionHost Singleton { get; private set; } = new InteractionHost();
 
-        private Dictionary<IInteractable, GameObject> _interactables = new();
+        private Dictionary<IInteractable, object> _interactables = new();
 
-        public void Register(GameObject receiver, IInteractable executor) => _interactables.Add(executor, receiver);
+        public void Register(object receiver, IInteractable executor) => _interactables.Add(executor, receiver);
 
         public void Remove(IInteractable executor) => _interactables.Remove(executor);
 
-        public void Remove(GameObject receiver)
+        public void Remove(object receiver)
         {
             var relatedInteractables = _interactables.Where(keyValue => keyValue.Value == receiver)
                 .Select(keyValue => keyValue.Key);
@@ -23,7 +22,7 @@ namespace Runtime
                 Remove(interactable);
         }
 
-        public void SendInteraction<T>(T sender, GameObject to)
+        public void SendInteraction<T>(T sender, object to)
         {
             var suitableInteractables = _interactables.Where(keyValue => keyValue.Value == to)
                 .Select(keyValue => keyValue.Key);

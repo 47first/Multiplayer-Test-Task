@@ -651,7 +651,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237586953649728704}
   m_LocalRotation: {x: -0, y: -0, z: 0.40972853, w: -0.91220754}
-  m_LocalPosition: {x: -0.362, y: 0.078999996, z: -1}
+  m_LocalPosition: {x: -0.362, y: 0.078999996, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -841,10 +841,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0bbe6a8824ffab43a2970b5a710ec13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _nameLabel: {fileID: 237586954092514100}
+  _coinsLabel: {fileID: 237586953199606093}
+  _healthSlider: {fileID: 237586952535362223}
   <Configuration>k__BackingField:
     <JumpForce>k__BackingField: 6
     <MoveSpeed>k__BackingField: 3.5
     <RotationSpeed>k__BackingField: 0.2
+    <InitialHealth>k__BackingField: 100
   <ModelTransform>k__BackingField: {fileID: 237586952732639188}
   <Rigidbody>k__BackingField: {fileID: 237586953887837182}
   <Collider>k__BackingField: {fileID: 237586953887837181}
@@ -861,10 +865,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2491b8cd032e71945944962f0d91969e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectilePrefab: {fileID: 6178058317753616014, guid: d014d7ecf16bd9149b332505fe9778d6, type: 3}
-  _shootDirection: {fileID: 8606264773823982585}
   <Delay>k__BackingField: 0.6
   <BulletSpeed>k__BackingField: 10
+  <BulletDamage>k__BackingField: 20
+  _projectilePrefab: {fileID: 6178058317753616014, guid: d014d7ecf16bd9149b332505fe9778d6, type: 3}
+  _shootDirection: {fileID: 8606264773823982585}
 --- !u!1 &237586954051517629
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,7 +1132,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1999823469694502656}
   m_LocalRotation: {x: 0, y: -0, z: -0.40972853, w: -0.91220754}
-  m_LocalPosition: {x: -0.059723936, y: -0.084273115, z: 1}
+  m_LocalPosition: {x: -0.24, y: -0.287, z: 0}
   m_LocalScale: {x: -0.6666667, y: 0.6666667, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
