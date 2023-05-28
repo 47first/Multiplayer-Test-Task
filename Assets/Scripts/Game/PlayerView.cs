@@ -13,6 +13,7 @@ namespace Runtime
         [field: SerializeField] internal Transform ModelTransform { get; set; }
         [field: SerializeField] internal Rigidbody2D Rigidbody { get; set; }
         [field: SerializeField] internal Collider2D Collider { get; set; }
+        [field: SerializeField] internal ProjectileShooter Shooter { get; set; }
         internal Vector3 InitialScale { get; private set; }
         internal Vector3 MoveDir { get; set; }
 
@@ -31,14 +32,20 @@ namespace Runtime
             if (IsOwner == false)
                 return;
 
+            Shooter.Delay = Configuration.ShooterDelay;
             InitialScale = TargetScale.Value = ModelTransform.localScale;
             _presenter = new(this);
         }
 
         private void Update()
         {
-            transform.position += MoveDir;
+            if (IsOwner)
+            {
+                _presenter.Update();
 
+                transform.position += MoveDir;
+            }
+                
             ModelTransform.localScale = Vector3.LerpUnclamped(ModelTransform.localScale,
                 TargetScale.Value,
                 Configuration.RotationSpeed);
@@ -46,10 +53,8 @@ namespace Runtime
 
         private void LateUpdate()
         {
-            if (IsOwner == false)
-                return;
-
-            ResetValues();
+            if (IsOwner)
+                ResetValues();
         }
 
         private void ResetValues()

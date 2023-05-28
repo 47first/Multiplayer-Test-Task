@@ -12,8 +12,12 @@ namespace Runtime
             ConfigureInput();
         }
 
+        public void Update() => _view.Shooter.TryShoot();
+
         public void MoveLeft() => Move(Vector3.left * _view.Configuration.MoveSpeed);
+
         public void MoveRight() => Move(Vector3.right * _view.Configuration.MoveSpeed);
+
         public void Jump()
         {
             if (IsOnGround())

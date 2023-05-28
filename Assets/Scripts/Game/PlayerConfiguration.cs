@@ -8,5 +8,6 @@ namespace Runtime
         [field: SerializeField] internal float JumpForce { get; private set; }
         [field: SerializeField] internal float MoveSpeed { get; private set; }
         [field: SerializeField] internal float RotationSpeed { get; private set; }
+        [field: SerializeField] internal float ShooterDelay { get; private set; }
     }
 }

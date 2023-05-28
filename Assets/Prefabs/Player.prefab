@@ -721,9 +721,10 @@ GameObject:
   - component: {fileID: 237586953887837180}
   - component: {fileID: 237586953887837181}
   - component: {fileID: 237586953887837182}
-  - component: {fileID: 237586953887837183}
   - component: {fileID: 237586953887837153}
   - component: {fileID: 2501162838518357330}
+  - component: {fileID: 237586953887837183}
+  - component: {fileID: 8853834902270930235}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -785,25 +786,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &237586953887837183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 237586953887837178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0bbe6a8824ffab43a2970b5a710ec13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <Configuration>k__BackingField:
-    <JumpForce>k__BackingField: 6
-    <MoveSpeed>k__BackingField: 3.5
-    <RotationSpeed>k__BackingField: 0.2
-  <ModelTransform>k__BackingField: {fileID: 237586952732639188}
-  <Rigidbody>k__BackingField: {fileID: 237586953887837182}
-  <Collider>k__BackingField: {fileID: 237586953887837181}
 --- !u!114 &237586953887837153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,6 +828,41 @@ MonoBehaviour:
   ScaleThreshold: 0.01
   InLocalSpace: 0
   Interpolate: 1
+--- !u!114 &237586953887837183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237586953887837178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0bbe6a8824ffab43a2970b5a710ec13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Configuration>k__BackingField:
+    <JumpForce>k__BackingField: 6
+    <MoveSpeed>k__BackingField: 3.5
+    <RotationSpeed>k__BackingField: 0.2
+    <ShooterDelay>k__BackingField: 1
+  <ModelTransform>k__BackingField: {fileID: 237586952732639188}
+  <Rigidbody>k__BackingField: {fileID: 237586953887837182}
+  <Collider>k__BackingField: {fileID: 237586953887837181}
+  <Shooter>k__BackingField: {fileID: 8853834902270930235}
+--- !u!114 &8853834902270930235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 237586953887837178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2491b8cd032e71945944962f0d91969e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _projectilePrefab: {fileID: 6178058317753616014, guid: d014d7ecf16bd9149b332505fe9778d6, type: 3}
+  _shootDirection: {fileID: 237586953649728707}
 --- !u!1 &237586954051517629
 GameObject:
   m_ObjectHideFlags: 0
