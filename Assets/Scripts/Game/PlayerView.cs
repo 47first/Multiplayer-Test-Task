@@ -6,7 +6,7 @@ namespace Runtime
     public sealed class PlayerView : NetworkBehaviour
     {
         // Network
-        internal NetworkVariable<Vector3> TargetScale { get; set; }
+        internal NetworkVariable<Vector3> TargetRotation { get; set; }
 
         //Local
         [field: SerializeField] internal PlayerConfiguration Configuration { get; set; } = new();
@@ -14,14 +14,14 @@ namespace Runtime
         [field: SerializeField] internal Rigidbody2D Rigidbody { get; set; }
         [field: SerializeField] internal Collider2D Collider { get; set; }
         [field: SerializeField] internal ProjectileShooter Shooter { get; set; }
-        internal Vector3 InitialScale { get; private set; }
+        internal Vector3 InitialRotation { get; private set; }
         internal Vector3 MoveDir { get; set; }
 
         private PlayerPresenter _presenter;
 
         private void Awake()
         {
-            TargetScale = new(readPerm: NetworkVariableReadPermission.Everyone,
+            TargetRotation = new(readPerm: NetworkVariableReadPermission.Everyone,
                 writePerm: NetworkVariableWritePermission.Owner);
         }
 
@@ -32,8 +32,7 @@ namespace Runtime
             if (IsOwner == false)
                 return;
 
-            Shooter.Delay = Configuration.ShooterDelay;
-            InitialScale = TargetScale.Value = ModelTransform.localScale;
+            InitialRotation = TargetRotation.Value = ModelTransform.localEulerAngles;
             _presenter = new(this);
         }
 
@@ -46,8 +45,8 @@ namespace Runtime
                 transform.position += MoveDir;
             }
                 
-            ModelTransform.localScale = Vector3.LerpUnclamped(ModelTransform.localScale,
-                TargetScale.Value,
+            ModelTransform.localEulerAngles = Vector3.LerpUnclamped(ModelTransform.localEulerAngles,
+                TargetRotation.Value,
                 Configuration.RotationSpeed);
         }
 

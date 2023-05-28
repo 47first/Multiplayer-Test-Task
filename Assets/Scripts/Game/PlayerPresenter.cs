@@ -29,15 +29,15 @@ namespace Runtime
             _view.MoveDir += dir * Time.deltaTime;
 
             if (dir.x > 0)
-                _view.TargetScale.Value = _view.InitialScale;
+                _view.TargetRotation.Value = _view.InitialRotation;
 
             else
             {
-                var newScale = _view.InitialScale;
+                var newRotation = _view.InitialRotation;
 
-                newScale.x *= -1;
+                newRotation.y += 180;
 
-                _view.TargetScale.Value = newScale;
+                _view.TargetRotation.Value = newRotation;
             }
         }
 
