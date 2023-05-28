@@ -1,5 +1,6 @@
 using System;
 using Unity.Netcode;
+using UnityEngine;
 using NetworkLoadSceneMode = UnityEngine.SceneManagement.LoadSceneMode;
 
 namespace Runtime

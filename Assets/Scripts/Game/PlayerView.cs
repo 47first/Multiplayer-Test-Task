@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
@@ -26,12 +27,18 @@ namespace Runtime
         internal Vector3 InitialRotation { get; private set; }
         internal Vector3 MoveDir { get; set; }
 
+        // Called only on server side
+        internal event Action OnDeath;
+
         private PlayerPresenter _presenter;
 
+        // If method called by not the server, Exception will be throwed
         public void ReceiveDamage(float damage)
         {
-            if (IsServer)
-                Health.Value -= damage;
+            Health.Value -= damage;
+
+            if (Health.Value <= 0)
+                NetworkObject.Despawn();
         }
 
         public override void OnNetworkSpawn()
@@ -74,6 +81,9 @@ namespace Runtime
 
         private void Update()
         {
+            if (GameView.Singleton.IsGameStarted.Value == false)
+                return;
+
             if (IsOwner)
             {
                 _presenter.Update();
@@ -96,6 +106,8 @@ namespace Runtime
         {
             MoveDir = Vector3.zero;
         }
+
+        private void OnDestroy() => OnDeath?.Invoke();
 
         private void OnTriggerEnter2D(Collider2D collider)
         {

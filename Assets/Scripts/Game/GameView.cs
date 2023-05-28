@@ -1,41 +1,33 @@
-using System.Threading.Tasks;
-using TMPro;
 using Unity.Netcode;
-using Unity.Services.Authentication;
-using Unity.Services.Core;
-using Unity.Services.Relay.Models;
 using UnityEngine;
 
 namespace Runtime
 {
-    public class GameView : MonoBehaviour
+    public sealed class GameView: NetworkBehaviour
     {
-        [field: SerializeField] private int MaxConnections { get; set; }
+        [filed: SerializeField] public static GameView Singleton { get; private set; }
+
+        internal NetworkVariable<bool> IsGameStarted { get; private set; }
+        [field: SerializeField] internal PlayersSpawner PlayersSpawner { get; private set; }
 
         private GamePresenter _presenter;
 
-        private void Start()
+        public override void OnNetworkSpawn()
         {
-            _presenter = new();
+            base.OnNetworkSpawn();
+
+            if (IsServer)
+                _presenter = new(this);
         }
 
-        private async void SetJoinCode()
+        private void Awake()
         {
-            string joinCode = await GetJoinCode(MaxConnections);
+            IsGameStarted = new(value: false, readPerm: NetworkVariableReadPermission.Everyone,
+                writePerm: NetworkVariableWritePermission.Server);
+
+            Singleton = this;
         }
 
-        public static async Task<string> GetJoinCode(int maxConn)
-        {
-            await UnityServices.InitializeAsync();
-
-            if (AuthenticationService.Instance.IsSignedIn == false)
-                await AuthenticationService.Instance.SignInAnonymouslyAsync();
-
-            Allocation allocation = await Unity.Services.Relay.RelayService.Instance.CreateAllocationAsync(maxConn);
-
-            var joinCode = await Unity.Services.Relay.RelayService.Instance.GetJoinCodeAsync(allocation.AllocationId);
-
-            return joinCode;
-        }
+        private void OnDestroy() => _presenter?.Dispose();
     }
 }
