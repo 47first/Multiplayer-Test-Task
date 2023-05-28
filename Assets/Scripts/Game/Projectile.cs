@@ -29,14 +29,6 @@ namespace Runtime
             transform.position = transform.TransformPoint(Speed * Time.deltaTime * Vector3.right);
         }
 
-        private void OnTriggerEnter2D(Collider2D collider)
-        {
-            if (IsServer == false)
-                return;
-
-            InteractionHost.Singleton.SendInteraction(this, collider.gameObject);
-        }
-
         public void Interact(object sender)
         {
             if (sender is PlayerView playerView &&
