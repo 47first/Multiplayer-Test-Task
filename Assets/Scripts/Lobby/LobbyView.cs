@@ -3,18 +3,22 @@ using UnityEngine.UIElements;
 
 namespace Runtime
 {
-    public class LobbyView: MonoBehaviour
+    public sealed class LobbyView: MonoBehaviour
     {
         [SerializeField] private UIDocument _uiDocument;
-        private TextField _textField;
-        private Button _joinButton;
-        private Button _createButton;
+        internal TextField KeyField { get; private set; }
+        internal Button JoinButton { get; private set; }
+        internal Button CreateButton { get; private set; }
+
+        private LobbyPresenter _presenter;
 
         private void Start()
         {
-            _textField = _uiDocument.rootVisualElement.Q<TextField>("KeyTextField");
-            _joinButton = _uiDocument.rootVisualElement.Q<Button>("JoinButton");
-            _createButton = _uiDocument.rootVisualElement.Q<Button>("CreateNewButton");
+            KeyField = _uiDocument.rootVisualElement.Q<TextField>("KeyTextField");
+            JoinButton = _uiDocument.rootVisualElement.Q<Button>("JoinButton");
+            CreateButton = _uiDocument.rootVisualElement.Q<Button>("CreateNewButton");
+
+            _presenter = new(this);
         }
     }
 }

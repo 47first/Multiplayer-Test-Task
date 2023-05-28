@@ -8,32 +8,20 @@ using UnityEngine;
 
 namespace Runtime
 {
-    public class SceneView : MonoBehaviour
+    public class GameView : MonoBehaviour
     {
-        [field: SerializeField] private TextMeshProUGUI codeTmp;
         [field: SerializeField] private int MaxConnections { get; set; }
+
+        private GamePresenter _presenter;
 
         private void Start()
         {
-            //SetJoinCode();
-        }
-
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.H))
-                NetworkManager.Singleton.StartHost();
-
-            if(Input.GetKeyDown(KeyCode.C))
-                NetworkManager.Singleton.StartClient();
+            _presenter = new();
         }
 
         private async void SetJoinCode()
         {
-            //codeTmp.text = "??????";
-
             string joinCode = await GetJoinCode(MaxConnections);
-
-            //codeTmp.text = joinCode;
         }
 
         public static async Task<string> GetJoinCode(int maxConn)
