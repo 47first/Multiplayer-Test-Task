@@ -18,6 +18,8 @@ namespace Runtime
 
         private void OnCreateButtonClicked()
         {
+            SetNickname();
+
             var networkManager = NetworkManager.Singleton;
 
             networkManager.StartHost();
@@ -41,9 +43,16 @@ namespace Runtime
 
         private void OnJoinButtonClicked()
         {
+            SetNickname();
+
             NetworkManager.Singleton.StartClient();
 
             NetworkManager.Singleton.SceneManager.OnLoad += OnPlayerLoad;
+        }
+
+        private void SetNickname()
+        {
+            ConnectionDataRecorder.SetData(_view.NicknameField.text);
         }
     }
 }

@@ -6,6 +6,7 @@ namespace Runtime
     public sealed class LobbyView: MonoBehaviour
     {
         [SerializeField] private UIDocument _uiDocument;
+        internal TextField NicknameField { get; private set; }
         internal TextField KeyField { get; private set; }
         internal Button JoinButton { get; private set; }
         internal Button CreateButton { get; private set; }
@@ -14,6 +15,7 @@ namespace Runtime
 
         private void Start()
         {
+            NicknameField = _uiDocument.rootVisualElement.Q<TextField>("NicknameTextField");
             KeyField = _uiDocument.rootVisualElement.Q<TextField>("KeyTextField");
             JoinButton = _uiDocument.rootVisualElement.Q<Button>("JoinButton");
             CreateButton = _uiDocument.rootVisualElement.Q<Button>("CreateNewButton");

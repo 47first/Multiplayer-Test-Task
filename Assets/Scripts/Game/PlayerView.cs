@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,7 @@ namespace Runtime
         [SerializeField] private Slider _healthSlider;
 
         // Network
+        internal NetworkVariable<FixedString128Bytes> Nickname { get; set; }
         internal NetworkVariable<Vector3> TargetRotation { get; set; }
         internal NetworkVariable<int> CoinsAmount { get; set; }
         internal NetworkVariable<float> Health { get; set; }
@@ -59,8 +61,7 @@ namespace Runtime
 
         private void BindView()
         {
-            _nameLabel.text = "Cool Player";
-
+            _nameLabel.text = Nickname.Value.ToString();
             _healthSlider.maxValue = Configuration.InitialHealth;
             Health.OnValueChanged += (prev, cur) => _healthSlider.value = cur;
 
@@ -76,6 +77,9 @@ namespace Runtime
                 writePerm: NetworkVariableWritePermission.Server);
 
             CoinsAmount = new(readPerm: NetworkVariableReadPermission.Everyone,
+                writePerm: NetworkVariableWritePermission.Server);
+
+            Nickname = new(readPerm: NetworkVariableReadPermission.Everyone,
                 writePerm: NetworkVariableWritePermission.Server);
         }
 

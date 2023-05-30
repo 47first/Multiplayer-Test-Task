@@ -41,7 +41,10 @@ namespace Runtime
 
             if (alivePlayers.Count() <= 1)
             {
-                _view.WinnerPopup.ShowClientRpc("bebra", 500);
+                var alivePlayer = alivePlayers.First();
+
+                _view.WinnerPopup.ShowClientRpc(alivePlayer.Nickname.Value.ToString(),
+                    alivePlayer.CoinsAmount.Value);
             }
         }
 
