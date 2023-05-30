@@ -8,10 +8,8 @@ namespace Runtime
         {
             base.OnNetworkSpawn();
 
-            if (IsServer == false)
-                return;
-
-            InteractionHost.Singleton.Register(gameObject, this);
+            if (IsServer)
+                InteractionHost.Singleton.Register(gameObject, this);
         }
 
         public void Interact(object sender)

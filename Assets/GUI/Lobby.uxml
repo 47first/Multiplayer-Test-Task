@@ -5,8 +5,8 @@
                 <ui:Label text="Server Key:" display-tooltip-when-elided="true" />
                 <ui:TextField picking-mode="Ignore" value="filler text" name="KeyTextField" is-delayed="false" password="false" focusable="true" style="visibility: visible; display: flex; width: auto; align-items: flex-start; min-width: 100px; max-width: 120px;" />
             </ui:VisualElement>
-            <ui:Button text="Join" display-tooltip-when-elided="true" name="JoinButton" />
-            <ui:Button text="Create new" display-tooltip-when-elided="true" name="CreateNewButton" />
+            <ui:Button text="Join" display-tooltip-when-elided="true" name="JoinButton" focusable="false" />
+            <ui:Button text="Create new" display-tooltip-when-elided="true" name="CreateNewButton" focusable="false" />
         </ui:VisualElement>
     </ui:VisualElement>
     <ui:VisualElement style="position: absolute; flex-grow: 1; flex-basis: auto; width: 100%; height: 30%;">

@@ -14,7 +14,7 @@ namespace Runtime
 
             player.transform.position = _spawnPoints[0].position;
 
-            player.NetworkObject.SpawnWithOwnership(id);
+            player.NetworkObject.SpawnWithOwnership(id, true);
 
             return player;
         }

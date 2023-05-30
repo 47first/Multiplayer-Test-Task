@@ -13,6 +13,8 @@ namespace Runtime
 
         private void OnPlayerDisconnect(ulong playerId)
         {
+            Debug.Log("On Player Disconnect");
+
             if (IsLocalPlayerOrServer(playerId) == false)
                 return;
 

@@ -29,7 +29,13 @@ namespace Runtime
 
         private void OnPlayerLoad(ulong clientId, string sceneName, NetworkLoadSceneMode loadSceneMode, AsyncOperation asyncOperation)
         {
-            if (NetworkManager.Singleton.LocalClientId == clientId)
+            Debug.Log("On Player Load");
+
+            var networkManager = NetworkManager.Singleton;
+
+            networkManager.SceneManager.OnLoad -= OnPlayerLoad;
+
+            if (networkManager.LocalClientId == clientId)
                 LoadingView.ShowLoadingScreen(asyncOperation);
         }
 

@@ -23,8 +23,6 @@ namespace Runtime
 
         private void OnPlayerConnected(ulong clientId, string sceneName, LoadSceneMode loadSceneMode)
         {
-            Debug.Log($"OnPlayer Connected: {_view.IsGameStarted.Value == false}");
-
             if (_view.IsGameStarted.Value)
                 return;
 
@@ -43,7 +41,7 @@ namespace Runtime
 
             if (alivePlayers.Count() <= 1)
             {
-                Debug.Log($"{alivePlayers.First().name} wins");
+                _view.WinnerPopup.ShowClientRpc("bebra", 500);
             }
         }
 

@@ -12,6 +12,8 @@ namespace Runtime
         {
             AsyncOperation = asyncOperation;
 
+            AsyncOperation.allowSceneActivation = false;
+
             SceneManager.LoadScene("Loading", LoadSceneMode.Additive);
         }
 
@@ -22,14 +24,10 @@ namespace Runtime
 
         private IEnumerator UpdateProgressBar()
         {
-            AsyncOperation.allowSceneActivation = false;
-
             while (AsyncOperation.isDone == false)
             {
                 yield return null;
             }
-
-            yield return new WaitForSeconds(1);
 
             SceneManager.UnloadScene(SceneManager.GetSceneByName("Loading"));
 

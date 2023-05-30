@@ -1,14 +1,16 @@
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Runtime
 {
     public sealed class GameView: NetworkBehaviour
     {
-        [filed: SerializeField] public static GameView Singleton { get; private set; }
+        public static GameView Singleton { get; private set; }
 
         internal NetworkVariable<bool> IsGameStarted { get; private set; }
         [field: SerializeField] internal PlayersSpawner PlayersSpawner { get; private set; }
+        [field: SerializeField] internal WinnerPopupView WinnerPopup { get; private set; }
 
         private GamePresenter _presenter;
 
