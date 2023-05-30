@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace Runtime
 {
-    public sealed class GamePresenter: IDisposable
+    public sealed class GamePresenter
     {
         private List<PlayerView> _players;
         private GameView _view;
@@ -19,11 +19,6 @@ namespace Runtime
 
             _players = new List<PlayerView>();
             networkManager.SceneManager.OnLoadComplete += OnPlayerConnected;
-        }
-
-        public void Dispose()
-        {
-            NetworkManager.Singleton.SceneManager.OnLoadComplete -= OnPlayerConnected;
         }
 
         private void OnPlayerConnected(ulong clientId, string sceneName, LoadSceneMode loadSceneMode)

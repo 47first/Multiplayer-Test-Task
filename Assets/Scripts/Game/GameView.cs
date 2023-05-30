@@ -27,7 +27,5 @@ namespace Runtime
 
             Singleton = this;
         }
-
-        private void OnDestroy() => _presenter?.Dispose();
     }
 }
