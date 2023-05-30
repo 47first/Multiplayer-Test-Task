@@ -1,5 +1,8 @@
 using System;
+using System.Net.Sockets;
+using System.Net;
 using Unity.Netcode;
+using Unity.Netcode.Transports.UTP;
 using UnityEngine;
 using NetworkLoadSceneMode = UnityEngine.SceneManagement.LoadSceneMode;
 
@@ -16,9 +19,11 @@ namespace Runtime
             _view.JoinButton.clicked += OnJoinButtonClicked;
         }
 
-        private void OnCreateButtonClicked()
+        private async void OnCreateButtonClicked()
         {
             SetNickname();
+
+            ConfigureConnection(GetAddress());
 
             var networkManager = NetworkManager.Singleton;
 
@@ -41,8 +46,10 @@ namespace Runtime
                 LoadingView.ShowLoadingScreen(asyncOperation);
         }
 
-        private void OnJoinButtonClicked()
+        private async void OnJoinButtonClicked()
         {
+            ConfigureConnection(_view.KeyField.text);
+
             SetNickname();
 
             NetworkManager.Singleton.StartClient();
@@ -53,6 +60,28 @@ namespace Runtime
         private void SetNickname()
         {
             ConnectionDataRecorder.SetData(_view.NicknameField.text);
+        }
+
+        private void ConfigureConnection(string address)
+        {
+            var networkManager = NetworkManager.Singleton;
+
+            var transport = networkManager.NetworkConfig.NetworkTransport as UnityTransport;
+
+            transport.ConnectionData.Address = address;
+        }
+
+        private string GetAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
         }
     }
 }

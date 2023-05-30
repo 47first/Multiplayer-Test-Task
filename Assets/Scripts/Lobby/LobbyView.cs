@@ -6,6 +6,7 @@ namespace Runtime
     public sealed class LobbyView: MonoBehaviour
     {
         [SerializeField] private UIDocument _uiDocument;
+        [field: SerializeField] internal RemoteGameConnector GameConnector { get; set; }
         internal TextField NicknameField { get; private set; }
         internal TextField KeyField { get; private set; }
         internal Button JoinButton { get; private set; }

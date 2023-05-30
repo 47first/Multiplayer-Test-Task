@@ -11,23 +11,26 @@ namespace Runtime
         public event Action OnMoveRight;
         public event Action OnJump;
 
-        private void Awake()
-        {
-            Singleton = this;
-        }
+        public bool MoveRightButtonPressed { get; set; }
+
+        public bool MoveLeftButtonPressed { get; set; }
+
+        public bool JumpButtonPressed { get; set; }
+
+        private void Awake() => Singleton = this;
 
         private void Update()
         {
             if (Input.anyKey == false)
                 return;
 
-            if (Input.GetKey(KeyCode.D))
+            if (Input.GetKey(KeyCode.D) || MoveRightButtonPressed)
                 OnMoveRight?.Invoke();
 
-            if (Input.GetKey(KeyCode.A))
+            if (Input.GetKey(KeyCode.A) || MoveLeftButtonPressed)
                 OnMoveLeft?.Invoke();
 
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || JumpButtonPressed)
                 OnJump?.Invoke();
         }
     }
